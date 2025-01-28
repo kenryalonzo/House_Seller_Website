@@ -617,30 +617,45 @@ nav a:hover::before {
 }
 
 .blog-description {
+    width: 340px;
     font-size: 16px;
     color: #666;
 }
 
 .blog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(3, 1fr); /* 3 colonnes équitables */
     gap: 20px;
 }
 
+.blog-grid > article:nth-last-child(2),
+.blog-grid > article:nth-last-child(1) {
+    grid-column: span 1 / span 1; /* Prend 1 colonne chacun */
+}
+
+.blog-grid > article:nth-last-child(2) {
+    grid-column-start: 2; /* Aligne le quatrième article au centre */
+}
+
+.haut {
+    margin-top: -120px;
+}
+
+.haut-trois {
+    margin-top: -140px;
+}
+
+/* Ajuste la hauteur des articles pour uniformiser si besoin */
 .blog-post {
+    position: relative; /* Ajoute un contexte de position pour l'image */
+    overflow: hidden; /* Empêche le dépassement de l'image */
     background: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer; /* Ajoute un effet de clic */
-}
-
-.blog-post:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
 }
 
 .blog-image {
@@ -648,10 +663,20 @@ nav a:hover::before {
     height: 200px;
     object-fit: cover;
     transition: transform 0.3s ease;
+    position: relative; /* Garde l'image dans son conteneur */
+    z-index: 1; /* S'assure que l'image reste visible */
 }
 
 .blog-post:hover .blog-image {
     transform: scale(1.05); /* Agrandit légèrement l'image au survol */
+}
+
+/* Optionnel : Amélioration de l'effet */
+.blog-content {
+    z-index: 2; /* S'assure que le texte reste au-dessus de l'image */
+    position: relative;
+    padding: 15px 20px;
+    background: #fff;
 }
 
 .blog-date {
@@ -675,34 +700,31 @@ nav a:hover::before {
 
 /* why-choose-us  */
 
-.why-choose-us {
-    text-align: center;
-    padding: 60px 20px;
-    background-color: #f9f9f9;
-  }
-  
-  .why-header {
-    margin-bottom: 40px;
+.why-header {
+    text-align: center; /* Centre le texte horizontalement */
+    margin-bottom: 40px; /* Ajoute un espacement sous le header */
   }
   
   .why-subtitle {
-    color: #007bff;
-    font-weight: 600;
     font-size: 14px;
-    letter-spacing: 1px;
+    font-weight: 600;
+    color: #007bff; /* Couleur bleu similaire */
     text-transform: uppercase;
+    margin-bottom: 8px;
     display: block;
-    margin-bottom: 10px;
   }
   
   .why-title {
     font-size: 32px;
     font-weight: 700;
-    line-height: 1.5;
+    line-height: 1.4;
     color: #2b2b2b;
+    margin: 0 auto;
+    max-width: 600px; /* Limite la largeur pour un alignement soigné */
   }
   
-  .why-grid {
+
+.why-grid {
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -710,13 +732,16 @@ nav a:hover::before {
   }
   
   .why-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #fff;
     border-radius: 12px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     max-width: 300px;
     flex: 1;
-    text-align: center;
+    text-align: left; /* Alignement à gauche */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
   
@@ -725,24 +750,41 @@ nav a:hover::before {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
   }
   
+  .why-content {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espace entre l'icône et le texte */
+  }
+  
   .why-icon {
-    width: 60px;
-    height: 60px;
-    margin: 0 auto 20px;
+    min-width: 60px; /* Taille fixe pour alignement */
+    min-height: 60px;
     background-color: #f3f7ff;
     border-radius: 50%;
+    font-size: 24px;
+    color: #007bff;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 24px;
-    color: #007bff;
+  }
+  
+  .eyes {
+    color: #7bd78a;
+  }
+  
+  .rent {
+    color: #fe006e;
+  }
+  
+  .textual {
+    flex: 1; /* Permet au texte de prendre toute la place disponible */
   }
   
   .why-item-title {
     font-size: 18px;
     font-weight: 600;
     color: #2b2b2b;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   .why-description {
@@ -750,7 +792,7 @@ nav a:hover::before {
     color: #666;
     line-height: 1.5;
   }
-
+  
   /* Faq  */
 
   .faq-section {
